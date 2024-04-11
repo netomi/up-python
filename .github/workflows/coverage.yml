@@ -72,18 +72,19 @@ jobs:
 
             fs.mkdirSync('./pr-comment', { recursive: true });
 
-            const PR_NUMBER = `${{ github.event.number }}`;
             const COVERAGE_PERCENTAGE = process.env.COVERAGE_PERCENTAGE;
             const COVERAGE_REPORT_PATH = `https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/`;
-            const COMMENT_BODY = `
+
+            var pr_number = `${{ github.event.number }}`;
+            var body = `
               Code coverage report is ready! :chart_with_upwards_trend:
 
               - **Code Coverage Percentage:** ${COVERAGE_PERCENTAGE}
               - **Code Coverage Report:** [View Coverage Report](${COVERAGE_REPORT_PATH})
               `;
 
-            fs.writeFileSync('./pr-comment/pr-number.txt, PR_NUMBER);
-            fs.writeFileSync('./pr-comment/body.txt', COMMENT_BODY);
+            fs.writeFileSync('./pr-comment/pr-number.txt, pr_number);
+            fs.writeFileSync('./pr-comment/body.txt', body);
 
       - uses: actions/upload-artifact@v2
         with:
