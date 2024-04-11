@@ -7,7 +7,7 @@ on:
       - completed
 
 jobs:
-  upload:
+  add-coverage-comment:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -45,7 +45,7 @@ jobs:
             var fs = require('fs');
 
             const issue_number = Number(fs.readFileSync('./pr-number.txt'));
-            const body = fs.readFileSync('./body.txt');
+            const body = fs.readFileSync('./body.txt', { encoding: 'utf8', flag: 'r' });
 
             await github.rest.issues.createComment({
               owner: context.repo.owner,
