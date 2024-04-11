@@ -83,7 +83,7 @@ jobs:
               - **Code Coverage Report:** [View Coverage Report](${COVERAGE_REPORT_PATH})
               `;
 
-            fs.writeFileSync('./pr-comment/pr-number.txt, pr_number);
+            fs.writeFileSync('./pr-comment/pr-number.txt', pr_number);
             fs.writeFileSync('./pr-comment/body.txt', body);
 
       - uses: actions/upload-artifact@v2
