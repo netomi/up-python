@@ -2,7 +2,7 @@ name: Add coverage comment to PR
 
 on:
   workflow_run:
-    workflows: ["Test with coverage"]
+    workflows: ["Python Test and Coverage"]
     types:
       - completed
 
