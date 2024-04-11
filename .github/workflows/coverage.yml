@@ -73,10 +73,9 @@ jobs:
             fs.mkdirSync('./pr-comment', { recursive: true });
 
             const PR_NUMBER = `${{ github.event.number }}`;
-            const COVERAGE_PERCENTAGE = process.env.COVERAGE_PERCENTAGE;;
+            const COVERAGE_PERCENTAGE = process.env.COVERAGE_PERCENTAGE;
             const COVERAGE_REPORT_PATH = `https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/`;
-            const COMMENT_BODY = 
-              `
+            const COMMENT_BODY = `
               Code coverage report is ready! :chart_with_upwards_trend:
 
               - **Code Coverage Percentage:** ${COVERAGE_PERCENTAGE}
