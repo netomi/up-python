@@ -5,7 +5,6 @@ on:
     branches:
       - main
 
-
 jobs:
   test-and-coverage:
     name: Test with coverage
@@ -17,19 +16,10 @@ jobs:
           git config --global user.email 'uprotocol-bot@eclipse.org'
 
       - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Apache Maven Central
-        uses: actions/setup-java@v3
-        with: # configure settings.xml
-          distribution: 'temurin'
-          java-version: '11'
-          server-id: ossrh
-          server-username: OSSRH_USER
-          server-password: OSSRH_PASSWORD
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
 
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5.1.0
         with:
           python-version: '3.x'
 
@@ -57,15 +47,14 @@ jobs:
           echo "COVERAGE_PERCENTAGE: $COVERAGE_PERCENTAGE"
           poetry run coverage html
 
-
       - name: Upload coverage report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
         with:
           name: coverage-report
           path: htmlcov/
 
       - name: Generate coverage comment
-        uses: actions/github-script@v6
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
           script: |
             const fs = require('fs');
@@ -86,13 +75,13 @@ jobs:
             fs.writeFileSync('./pr-comment/pr-number.txt', pr_number);
             fs.writeFileSync('./pr-comment/body.txt', body);
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
         with:
           name: pr-comment
           path: pr-comment/
 
       - name: Check code coverage
-        uses: actions/github-script@v6
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
           script: |
             const COVERAGE_PERCENTAGE = process.env.COVERAGE_PERCENTAGE;
